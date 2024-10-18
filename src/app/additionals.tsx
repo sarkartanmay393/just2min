@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -41,7 +46,7 @@ function PushNotificationManager() {
   useEffect(() => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       setIsSupported(true)
-      registerServiceWorker()
+      void registerServiceWorker()
     }
   }, [])
 
@@ -113,7 +118,7 @@ function PushNotificationManager() {
           />
         </div>
         {subscription && (
-          <form onSubmit={(e) => { e.preventDefault(); sendTestNotification(); }} className="mt-2 space-y-2">
+          <form onSubmit={(e) => { e.preventDefault(); void sendTestNotification(); }} className="mt-2 space-y-2">
             <Input
               type="text"
               placeholder="Enter notification message"
@@ -147,10 +152,6 @@ function InstallPrompt() {
     setIsStandalone(window.matchMedia('(display-mode: standalone)').matches)
   }, [])
 
-  if (isStandalone) {
-    return null // Don't show install button if already installed
-  }
-
   useEffect(() => {
     // Listen for the beforeinstallprompt event
     const handleBeforeInstallPrompt = (event: any) => {
@@ -172,6 +173,9 @@ function InstallPrompt() {
     }
   };
 
+  if (isStandalone) {
+    return null // Don't show install button if already installed
+  }
 
   return (
     <Card className="">

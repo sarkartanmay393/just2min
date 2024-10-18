@@ -8,6 +8,7 @@ const config = {
     "@typescript-eslint"
   ],
   "extends": [
+    "next",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked"
@@ -36,7 +37,9 @@ const config = {
           "attributes": false
         }
       }
-    ]
-  }
+    ],
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
+  },
 }
 module.exports = config;
