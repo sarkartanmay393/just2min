@@ -28,8 +28,6 @@ export async function sendNotification(message: string) {
   if (!subscription) {
     throw new Error('No subscription available')
   }
-
-  console.log('subscription', subscription.toJSON())
  
   try {
     await webpush.sendNotification(
